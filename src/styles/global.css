@@ -1,0 +1,28 @@
+/* Reset mínimo. Cada componente puede tener su propio archivo
+   Componente.module.css junto a Componente.tsx (CSS Modules). */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background-color: #0f0f0f;
+  color: #f4f4f4;
+}
+
+.lista-elementos {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.tarjeta-elemento {
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 0.75rem;
+  text-align: center;
+}
