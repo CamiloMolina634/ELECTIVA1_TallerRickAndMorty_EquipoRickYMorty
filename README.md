@@ -1,19 +1,36 @@
-# Taller Rick and Morty
+# ELECTIVA1_TallerRickAndMorty_EquipoRickYMorty
 
-Aplicación construida con Vite + React + TypeScript que consume la
+**Materia:** Electiva 1
+
+**Nombre del proyecto:** Taller Rick and Morty - Explorador de Personajes
+
+**Equipo:** EquipoRickYMorty
+
+**Integrantes:**
+- Camilo Molina Alvarez — [@CamiloMolina634](https://github.com/CamiloMolina634)
+- Brahian Montoya Obando — [@Brahian666](https://github.com/Brahian666)
+
+## Descripción
+
+Aplicación web construida con Vite + React + TypeScript que consume la
 [Rick and Morty API](https://rickandmortyapi.com/documentation) (pública, gratuita,
-sin API key).
+sin API key). Permite listar personajes, buscar, ver el detalle de cada uno,
+marcar favoritos y maneja los distintos estados de la petición (carga, error,
+vacío y éxito).
 
-## Integrantes
+## Requerimientos
 
-- Camilo Molina — [@CamiloMolina634](https://github.com/CamiloMolina634)
-- Brahian — [@Brahian666](https://github.com/Brahian666) <!-- TODO: confirmar usuario exacto -->
+- Node.js 18 o superior
+- npm
+- React 19
+- TypeScript
+- Vite
 
 ## Cómo levantar el proyecto
 
 ```bash
-git clone https://github.com/CamiloMolina634/taller-rick-and-morty.git
-cd taller-rick-and-morty
+git clone https://github.com/CamiloMolina634/ELECTIVA1_TallerRickAndMorty_EquipoRickYMorty.git
+cd ELECTIVA1_TallerRickAndMorty_EquipoRickYMorty
 npm install
 npm run dev
 ```
@@ -45,3 +62,7 @@ repositorio para el detalle y el responsable de cada uno.
 (Completar solo si usan algún *nice to have*: una librería de peticiones en vez
 de `fetch`, o variables de entorno para una API key. Explicar en 8-12 líneas
 qué hace por dentro, qué código propio reemplaza y por qué lo eligieron.)
+
+## Licencia
+
+Este proyecto usa la licencia [MIT](./LICENSE).
