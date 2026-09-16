@@ -26,3 +26,26 @@ body {
   padding: 0.75rem;
   text-align: center;
 }
+
+/* RF-02: estados */
+.estado-mensaje {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  border: 2px solid #555;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.estado-mensaje[data-tipo="cargando"] {
+  border-color: #3b82f6;
+}
+
+.estado-mensaje[data-tipo="error"] {
+  border-color: #e5484d;
+  color: #ff8a8d;
+}
+
+.estado-mensaje[data-tipo="vacio"] {
+  border-style: dashed;
+}
