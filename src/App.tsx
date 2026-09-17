@@ -21,6 +21,21 @@ function App() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [favoritos, setFavoritos] = useState<number[]>(() => {
+  const guardado = localStorage.getItem("favoritos");
+  if (guardado) {
+    try {
+      return JSON.parse(guardado);
+    } catch {
+      return [];
+    }
+  }
+  return [];
+});
+
+  useEffect(() => {
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+  }, [favoritos]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -42,6 +57,16 @@ function App() {
 
     return () => controller.abort();
   }, []);
+
+  const toggleFavorito = (id: number) => {
+    setFavoritos((prevFavoritos) => {
+      if (prevFavoritos.includes(id)) {
+        return prevFavoritos.filter((favId) => favId !== id);
+      } else {
+        return [...prevFavoritos, id];
+      }
+    });
+  };
 
   const personajeSeleccionado = personajes.find((p) => p.id === selectedId) ?? null;
 
@@ -66,11 +91,17 @@ function App() {
   return (
     <>
       <h1>Rick and Morty - Explorador de personajes</h1>
+      <p>Favoritos: {favoritos.length}</p>
       {/* TODO (RF-03): agregar <BarraBusqueda /> aquí y filtrar `personajes` */}
       {personajes.length === 0 ? (
         <EstadoMensaje tipo="vacio" mensaje="No hay personajes para mostrar." />
       ) : (
-        <ListaElementos personajes={personajes} onSeleccionar={setSelectedId} />
+        <ListaElementos 
+        personajes={personajes} 
+          onSeleccionar={setSelectedId}
+          favoritos={favoritos}
+          onToggleFavorito={toggleFavorito}
+        />
       )}
     </>
   );
