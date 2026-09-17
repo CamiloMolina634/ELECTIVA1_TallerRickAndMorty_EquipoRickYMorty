@@ -5,6 +5,7 @@ import { ListaElementos } from "./components/ListaElementos";
 import { DetalleElemento } from "./components/DetalleElemento";
 import { EstadoMensaje } from "./components/EstadoMensaje";
 import "./styles/global.css";
+import { BarraBusqueda } from "./components/BarraBusqueda";
 
 /**
  * Setup base (paso 0), hecho en conjunto por el equipo:
@@ -21,6 +22,7 @@ function App() {
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [busqueda, setBusqueda] = useState("");
 
   useEffect(() => {
     const controller = new AbortController();
@@ -44,7 +46,9 @@ function App() {
   }, []);
 
   const personajeSeleccionado = personajes.find((p) => p.id === selectedId) ?? null;
-
+  const personajesFiltrados = personajes.filter((personaje) =>
+    personaje.name.toLowerCase().includes(busqueda.toLowerCase()),
+  );
   if (cargando) {
     return <EstadoMensaje tipo="cargando" mensaje="Cargando personajes..." />;
   }
@@ -66,11 +70,21 @@ function App() {
   return (
     <>
       <h1>Rick and Morty - Explorador de personajes</h1>
-      {/* TODO (RF-03): agregar <BarraBusqueda /> aquí y filtrar `personajes` */}
-      {personajes.length === 0 ? (
-        <EstadoMensaje tipo="vacio" mensaje="No hay personajes para mostrar." />
+      <BarraBusqueda onBuscar={setBusqueda} />
+      {personajesFiltrados.length === 0 ? (
+        <EstadoMensaje
+          tipo="vacio"
+          mensaje={
+            busqueda !== ""
+              ? `No hay personajes que coincidan con "${busqueda}".`
+              : "No hay personajes para mostrar."
+          }
+        />
       ) : (
-        <ListaElementos personajes={personajes} onSeleccionar={setSelectedId} />
+        <ListaElementos
+          personajes={personajesFiltrados}
+          onSeleccionar={setSelectedId}
+        />
       )}
     </>
   );
