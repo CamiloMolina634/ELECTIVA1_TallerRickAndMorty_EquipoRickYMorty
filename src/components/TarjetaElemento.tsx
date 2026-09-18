@@ -9,14 +9,17 @@ interface TarjetaElementoProps {
 /**
  * RF-01: cada tarjeta debe mostrar al menos 3 datos distintos del personaje
  * (ya hay más de 3 disponibles en `Character`: status, species, gender, location...).
- * TODO (equipo): completar el marcado y los estilos.
+ // TODO: falta estilo.
  */
 export const TarjetaElemento = ({ personaje, onSeleccionar }: TarjetaElementoProps) => {
   return (
     <li className="tarjeta-elemento">
       <img src={personaje.image} alt={personaje.name} width={80} height={80} />
       <h3>{personaje.name}</h3>
-      {/* TODO: mostrar status, species, gender u otros campos */}
+      <p>Ubicación: {personaje.location.name}</p>
+      <p>Estatus: {personaje.status}</p>
+      <p>Especie: {personaje.species}</p>
+      <p>Género: {personaje.gender}</p>
       <button type="button" onClick={() => onSeleccionar(personaje.id)}>
         Ver detalle
       </button>
