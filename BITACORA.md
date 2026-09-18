@@ -30,3 +30,9 @@ se trabó, cómo lo resolvió, y qué commits corresponden.
 - Con qué me trabé: Entender por qué hace falta el clearTimeout y no solo el setTimeout.
 - Cómo lo resolví: Vi que el useEffect se vuelve a ejecutar en cada letra, así que sin la limpieza se acumulan timers y la búsqueda se dispara una vez por tecla. Con clearTimeout se cancela el anterior y solo queda el último.
 - Commits relacionados: "feat: agrega debounce de 400ms en la barra de busqueda", "feat: filtra el listado por el texto buscado"
+
+### 18/09/2026
+- Qué hice: Hice RF-06, el botón de reintentar. El botón lo puse en EstadoMensaje y solo sale cuando hay error. En App.tsx agregué un contador llamado "intento" y lo puse como dependencia del useEffect de la petición, para que al cambiar se vuelva a pedir la información a la API. También revisé y aprobé los PR de Camilo.
+- Con qué me trabé: No sabía cómo hacer para que el botón volviera a devolver la petición, porque esa petición está dentro de un useEffect y no se puede llamar directamente desde un botón.
+- Cómo lo resolví: Usé un contador. El botón solo le suma uno, y como el useEffect depende de ese número, React vuelve a ejecutarlo solo, y ahí se limpia el error y arranca la petición de nuevo.
+- Commits relacionados: "feat: agrega boton de reintento al estado de error", "feat: relanza la peticion al reintentar sin recargar la pagina", "style: agrega estilos del boton de reintento"
