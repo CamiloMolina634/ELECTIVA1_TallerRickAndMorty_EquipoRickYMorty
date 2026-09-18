@@ -3,15 +3,14 @@ import type { Character } from "../types/api";
 interface TarjetaElementoProps {
   personaje: Character;
   onSeleccionar: (id: number) => void;
-  // TODO (RF-05): props de favoritos (esFavorito, onToggleFavorito) se agregan aquí
+  esFavorito: boolean;
+  onToggleFavorito: (id: number) => void;
 }
 
 /**
- * RF-01: cada tarjeta debe mostrar al menos 3 datos distintos del personaje
- * (ya hay más de 3 disponibles en `Character`: status, species, gender, location...).
- // TODO: falta estilo.
+ * RF-01: cada tarjeta debe mostrar al menos 3 datos distintos del personaje.
  */
-export const TarjetaElemento = ({ personaje, onSeleccionar }: TarjetaElementoProps) => {
+export const TarjetaElemento = ({ personaje, onSeleccionar, esFavorito, onToggleFavorito }: TarjetaElementoProps) => {
   return (
     <li className="tarjeta-elemento">
       <img src={personaje.image} alt={personaje.name} width={80} height={80} />
@@ -20,6 +19,9 @@ export const TarjetaElemento = ({ personaje, onSeleccionar }: TarjetaElementoPro
       <p>Estatus: {personaje.status}</p>
       <p>Especie: {personaje.species}</p>
       <p>Género: {personaje.gender}</p>
+      <button type="button" onClick={() => onToggleFavorito(personaje.id)}>
+        {esFavorito ? "★ Quitar de favoritos" : "☆ Agregar a favoritos"}
+      </button>
       <button type="button" onClick={() => onSeleccionar(personaje.id)}>
         Ver detalle
       </button>
