@@ -5,7 +5,6 @@ interface EstadoMensajeProps {
 }
 
 export const EstadoMensaje = ({ tipo, mensaje, onReintentar }: EstadoMensajeProps) => {
-  void onReintentar; // TODO (RF-06): botón de reintento
 
   let titulo = "";
   if (tipo === "cargando") titulo = "⏳ Cargando";
@@ -16,6 +15,11 @@ export const EstadoMensaje = ({ tipo, mensaje, onReintentar }: EstadoMensajeProp
     <div className="estado-mensaje" data-tipo={tipo}>
       <h2>{titulo}</h2>
       <p>{mensaje}</p>
+      {tipo === "error" && onReintentar && (
+        <button type="button" className="boton-reintento" onClick={onReintentar}>
+          Reintentar
+        </button>
+      )}
     </div>
   );
 };

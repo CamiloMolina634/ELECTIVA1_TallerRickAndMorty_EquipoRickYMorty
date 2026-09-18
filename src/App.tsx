@@ -14,6 +14,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [busqueda, setBusqueda] = useState("");
+  const [intento, setIntento] = useState(0);
   const [favoritos, setFavoritos] = useState<number[]>(() => {
   const guardado = localStorage.getItem("favoritos");
   if (guardado) {
@@ -49,7 +50,7 @@ function App() {
       });
 
     return () => controller.abort();
-  }, []);
+  }, [intento]);
 
   const toggleFavorito = (id: number) => {
     setFavoritos((prevFavoritos) => {
@@ -71,8 +72,13 @@ function App() {
   }
 
   if (error) {
-    // TODO (RF-06): pasar onReintentar para volver a disparar la petición
-    return <EstadoMensaje tipo="error" mensaje={error} />;
+    return (
+      <EstadoMensaje
+        tipo="error"
+        mensaje={error}
+        onReintentar={() => setIntento((anterior) => anterior + 1)}
+      />
+    );
   }
 
   if (personajeSeleccionado) {

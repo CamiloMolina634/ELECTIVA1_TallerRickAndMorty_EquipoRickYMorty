@@ -49,3 +49,14 @@ body {
 .estado-mensaje[data-tipo="vacio"] {
   border-style: dashed;
 }
+
+/* RF-06: intento */
+.boton-reintento {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #e5484d;
+  border-radius: 6px;
+  background-color: transparent;
+  color: #ff8a8d;
+  cursor: pointer;
+}
