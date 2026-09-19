@@ -17,7 +17,7 @@ export const DetalleElemento = ({ personaje, onVolver }: DetalleElementoProps) =
         ← Volver al listado
       </button>
       <h2>{personaje.name}</h2>
-      <p>Origen: {personaje.origin.name}</p>
+      <p>Origen: {personaje.origin.name === "unknown" ? "Desconocido" : personaje.origin.name}</p>
       <p>Episodios: {personaje.episode.length}</p>
     </section>
   );
