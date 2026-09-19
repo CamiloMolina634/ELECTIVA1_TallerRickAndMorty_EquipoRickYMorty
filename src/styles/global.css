@@ -109,3 +109,21 @@ body {
   color: #f4f4f4;
   cursor: pointer;
 }
+
+.barra-busqueda {
+  display: block;
+  width: 90%;
+  max-width: 400px;
+  margin: 1rem auto;
+  padding: 0.6rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #555;
+  background-color: #1a1a1a;
+  color: #f4f4f4;
+  font-size: 1rem;
+}
+
+.barra-busqueda:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
