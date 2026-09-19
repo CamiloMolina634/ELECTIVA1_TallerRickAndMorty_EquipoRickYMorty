@@ -40,7 +40,7 @@ se trabó, cómo lo resolvió, y qué commits corresponden.
 - Commits relacionados: "feat: agrega debounce de 400ms en la barra de busqueda", "feat: filtra el listado por el texto buscado"
 
 ### 18/09/2026
-- Qué hice: Hice RF-06, el botón de reintentar. El botón lo puse en EstadoMensaje y solo sale cuando hay error. En App.tsx agregué un contador llamado "intento" y lo puse como dependencia del useEffect de la petición, para que al cambiar se vuelva a pedir la información a la API. También revisé y aprobé los PR de Camilo.
-- Con qué me trabé: No sabía cómo hacer para que el botón volviera a devolver la petición, porque esa petición está dentro de un useEffect y no se puede llamar directamente desde un botón.
+- Qué hice: Hice RF-06, el botón de reintentar. El botón lo puse en EstadoMensaje y solo sale cuando hay error. En App.tsx agregué un contador llamado "intento" y lo puse como dependencia del useEffect de la petición, para que al cambiar se vuelva a pedir la información a la API. También revisé y aprobé los PR de Camilo. Después trabajé con Camilo en la rama feature/estilos-generales: agregué los estilos de la barra de búsqueda y el bloque responsive de pantallas mas pequeñas, donde las tarjetas se reacomodan en columnas mas pequeñas.
+- Con qué me trabé: No sabía cómo hacer para que el botón volviera a lanzar la petición, porque esa petición está dentro de un useEffect y no se puede llamar directamente desde un botón.
 - Cómo lo resolví: Usé un contador. El botón solo le suma uno, y como el useEffect depende de ese número, React vuelve a ejecutarlo solo, y ahí se limpia el error y arranca la petición de nuevo.
-- Commits relacionados: "feat: agrega boton de reintento al estado de error", "feat: relanza la peticion al reintentar sin recargar la pagina", "style: agrega estilos del boton de reintento"
+- Commits relacionados: "feat: agrega boton de reintento al estado error", "feat: devuelve la peticion al reintentar sin recargar la pagina", "style: agrega estilos del boton de reintento", "style: agrega estilos a la barra de busqueda", "style: agrega estilos responsive para pantallas pequeñas"
