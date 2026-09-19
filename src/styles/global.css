@@ -127,3 +127,16 @@ body {
   outline: none;
   border-color: #3b82f6;
 }
+
+@media (max-width: 480px) {
+  .lista-elementos {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .estado-mensaje {
+    margin: 1.5rem auto;
+    padding: 1rem;
+  }
+}
