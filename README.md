@@ -52,10 +52,11 @@ src/
 
 ## Estado del proyecto
 
-Este README arranca con el setup base (tipos + servicio + wiring mínimo en
-`App.tsx`). Cada requisito funcional (RF-01 a RF-06) se implementa en su propia
-rama `feature/rfXX-...`, con su propio issue y Pull Request. Ver los issues del
-repositorio para el detalle y el responsable de cada uno.
+Proyecto completo. Los 6 requisitos funcionales (RF-01 a RF-06) están implementados,
+fusionados a `develop` y probados en el navegador, incluido el estado de error.
+Cada uno se desarrolló en su propia rama `feature/rfXX-...`, con su issue y su
+Pull Request correspondiente (ver la pestaña Issues y Pull Requests del repositorio
+para el detalle y el responsable de cada uno).
 
 ## Decisiones técnicas
 
