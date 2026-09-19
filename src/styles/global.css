@@ -89,3 +89,23 @@ body {
 .tarjeta-elemento button:hover {
   background-color: #333;
 }
+
+.detalle-elemento {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: 1px solid #333;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #1a1a1a;
+}
+
+.detalle-elemento button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: transparent;
+  color: #f4f4f4;
+  cursor: pointer;
+}
