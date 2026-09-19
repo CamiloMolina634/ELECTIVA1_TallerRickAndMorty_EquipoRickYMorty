@@ -19,7 +19,8 @@ function App() {
   const guardado = localStorage.getItem("favoritos");
   if (guardado) {
     try {
-      return JSON.parse(guardado);
+      const datos = JSON.parse(guardado);
+      return Array.isArray(datos) ? datos : [];
     } catch {
       return [];
     }
