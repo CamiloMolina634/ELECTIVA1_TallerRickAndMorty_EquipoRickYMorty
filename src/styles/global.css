@@ -60,3 +60,32 @@ body {
   color: #ff8a8d;
   cursor: pointer;
 }
+
+.tarjeta-elemento {
+  background-color: #1a1a1a;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.tarjeta-elemento:hover {
+  transform: translateY(-4px);
+  border-color: #888;
+}
+
+.tarjeta-elemento img {
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.tarjeta-elemento button {
+  margin: 0.25rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: transparent;
+  color: #f4f4f4;
+  cursor: pointer;
+}
+
+.tarjeta-elemento button:hover {
+  background-color: #333;
+}
