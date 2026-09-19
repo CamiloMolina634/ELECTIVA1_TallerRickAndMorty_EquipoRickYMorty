@@ -4,23 +4,33 @@ import { getCharacters } from "./services/api";
 import { ListaElementos } from "./components/ListaElementos";
 import { DetalleElemento } from "./components/DetalleElemento";
 import { EstadoMensaje } from "./components/EstadoMensaje";
+import { BarraBusqueda } from "./components/BarraBusqueda";
 import "./styles/global.css";
 
-/**
- * Setup base (paso 0), hecho en conjunto por el equipo:
- * - fetch de la API dentro de useEffect, con data/loading/error tipados
- * - AbortController para cancelar la petición en el cleanup
- * - un "selectedId" simple para alternar entre listado y detalle (RF-04)
- *
- * A partir de aquí cada quien construye su RF asignado (ver los issues
- * del repo). No hace falta que esto quede perfecto: es la base sobre la
- * que se apoyan RF-01 a RF-06, no la implementación final de ninguno.
- */
+
 function App() {
   const [personajes, setPersonajes] = useState<Character[]>([]);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [busqueda, setBusqueda] = useState("");
+  const [intento, setIntento] = useState(0);
+  const [favoritos, setFavoritos] = useState<number[]>(() => {
+  const guardado = localStorage.getItem("favoritos");
+  if (guardado) {
+    try {
+      const datos = JSON.parse(guardado);
+      return Array.isArray(datos) ? datos : [];
+    } catch {
+      return [];
+    }
+  }
+  return [];
+});
+
+  useEffect(() => {
+    localStorage.setItem("favoritos", JSON.stringify(favoritos));
+  }, [favoritos]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -41,17 +51,35 @@ function App() {
       });
 
     return () => controller.abort();
-  }, []);
+  }, [intento]);
+
+  const toggleFavorito = (id: number) => {
+    setFavoritos((prevFavoritos) => {
+      if (prevFavoritos.includes(id)) {
+        return prevFavoritos.filter((favId) => favId !== id);
+      } else {
+        return [...prevFavoritos, id];
+      }
+    });
+  };
 
   const personajeSeleccionado = personajes.find((p) => p.id === selectedId) ?? null;
+  const personajesFiltrados = personajes.filter((personaje) =>
+    personaje.name.toLowerCase().includes(busqueda.toLowerCase()),
+  );
 
   if (cargando) {
     return <EstadoMensaje tipo="cargando" mensaje="Cargando personajes..." />;
   }
 
   if (error) {
-    // TODO (RF-06): pasar onReintentar para volver a disparar la petición
-    return <EstadoMensaje tipo="error" mensaje={error} />;
+    return (
+      <EstadoMensaje
+        tipo="error"
+        mensaje={error}
+        onReintentar={() => setIntento((anterior) => anterior + 1)}
+      />
+    );
   }
 
   if (personajeSeleccionado) {
@@ -66,11 +94,24 @@ function App() {
   return (
     <>
       <h1>Rick and Morty - Explorador de personajes</h1>
-      {/* TODO (RF-03): agregar <BarraBusqueda /> aquí y filtrar `personajes` */}
-      {personajes.length === 0 ? (
-        <EstadoMensaje tipo="vacio" mensaje="No hay personajes para mostrar." />
+      <p>Favoritos: {favoritos.length}</p>
+      <BarraBusqueda onBuscar={setBusqueda} />
+      {personajesFiltrados.length === 0 ? (
+        <EstadoMensaje
+          tipo="vacio"
+          mensaje={
+            busqueda !== ""
+              ? `No hay personajes que coincidan con "${busqueda}".`
+              : "No hay personajes para mostrar."
+          }
+        />
       ) : (
-        <ListaElementos personajes={personajes} onSeleccionar={setSelectedId} />
+        <ListaElementos
+          personajes={personajesFiltrados}
+          onSeleccionar={setSelectedId}
+          favoritos={favoritos}
+          onToggleFavorito={toggleFavorito}
+        />
       )}
     </>
   );

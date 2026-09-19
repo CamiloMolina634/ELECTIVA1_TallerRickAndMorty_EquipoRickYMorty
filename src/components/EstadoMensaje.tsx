@@ -4,17 +4,22 @@ interface EstadoMensajeProps {
   onReintentar?: () => void;
 }
 
-/**
- * RF-02 (estados) y RF-06 (reintento) se resuelven principalmente aquí.
- * TODO (equipo): mostrar contenido distinto según `tipo` y, si `tipo === "error"`
- * y viene `onReintentar`, renderizar el botón de reintento.
- */
 export const EstadoMensaje = ({ tipo, mensaje, onReintentar }: EstadoMensajeProps) => {
-  void onReintentar; // TODO (RF-06): renderizar el boton de reintento cuando tipo === "error"
+
+  let titulo = "";
+  if (tipo === "cargando") titulo = "⏳ Cargando";
+  if (tipo === "error") titulo = "⚠️ Error";
+  if (tipo === "vacio") titulo = "🔍 Sin resultados";
+
   return (
     <div className="estado-mensaje" data-tipo={tipo}>
+      <h2>{titulo}</h2>
       <p>{mensaje}</p>
-      {/* TODO: botón de reintento cuando tipo === "error" */}
+      {tipo === "error" && onReintentar && (
+        <button type="button" className="boton-reintento" onClick={onReintentar}>
+          Reintentar
+        </button>
+      )}
     </div>
   );
 };
